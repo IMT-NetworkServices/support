@@ -100,12 +100,7 @@ fi
 
 
 # Install Homebrew | strip out all interactive prompts
-/bin/bash -c "$(curl -fsSL \
-	https://raw.githubusercontent.com/Homebrew/install/master/install.sh | \
-	sed "s/abort \"Don't run this as root\!\"/\
-	echo \"WARNING: Running as root...\"/" | \
-	sed 's/  wait_for_user/  :/')" 2>&1 | tee "${BREW_INSTALL_LOG}"
-
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | sed "s/abort \"Don't run this as root\!\"/\ echo \"WARNING: Running as root...\"/" | 	sed 's/  wait_for_user/  :/')" 2>&1 | tee "${BREW_INSTALL_LOG}"
 # Reset Homebrew permissions for target user
 brew_file_paths=$(/usr/bin/sed '1,/==> This script will install:/d;/==> /,$d' \
 	"${BREW_INSTALL_LOG}")
